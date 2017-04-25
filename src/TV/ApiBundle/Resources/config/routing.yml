@@ -1,0 +1,3 @@
+tv_api_homepage:
+    path:     /
+    defaults: { _controller: TVApiBundle:Default:index }

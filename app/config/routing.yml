@@ -1,0 +1,19 @@
+tv_api:
+    resource: "@TVApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tv_prono:
+    resource: "@TVPronoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tv_calendar:
+    resource: "@TVCalendarBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tv_core:
+    resource: "@TVCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

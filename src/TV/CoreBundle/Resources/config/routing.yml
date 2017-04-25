@@ -1,0 +1,3 @@
+tv_core_homepage:
+    path:     /
+    defaults: { _controller: TVCoreBundle:Default:index }

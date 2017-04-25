@@ -1,0 +1,4 @@
+services:
+#    tv_prono.example:
+#        class: TV\PronoBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
