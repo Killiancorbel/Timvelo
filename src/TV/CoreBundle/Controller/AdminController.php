@@ -283,6 +283,7 @@ class AdminController extends Controller
         return $this->render('TVCoreBundle:Admin:addRider.html.twig', array(
             'form' => $form->createView(),
             'riders' => $riders));
-    }
+    } // TODO next: CSS /!\ - Keep going with result input form. Do a trello with every task to go faster then. Do all races management and then API bundle, then android app, then integrate one bundle at a time in the app.
+      // TO WORK : Know better about API integration in Android code.
 
 }
