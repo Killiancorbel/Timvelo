@@ -71,3 +71,27 @@ tv_core_edit_classification:
     defaults: { _controller: TVCoreBundle:Admin:editClassification }
     requirements:
         id: \d+
+
+# Teams
+
+tv_core_add_team:
+    path:    /teams/add
+    defaults: { _controller: TVCoreBundle:Admin:addTeam }
+
+tv_core_edit_team:
+    path:    /teams/edit/{id}
+    defaults: { _controller: TVCoreBundle:Admin:editTeam }
+    requirements:
+        id: \d+
+
+# Riders
+
+tv_core_add_rider:
+    path:    /riders/add
+    defaults: { _controller: TVCoreBundle:Admin:addRider }
+
+tv_core_edit_rider:
+    path:    /riders/edit/{id}
+    defaults: { _controller: TVCoreBundle:Admin:editRider }
+    requirements:
+        id: \d+

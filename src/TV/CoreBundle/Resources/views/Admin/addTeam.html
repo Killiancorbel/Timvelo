@@ -5,10 +5,11 @@
 		<input type="text" name="search" class="round" />
 	</div>
 	<div class="results">
-		{% for profile in profiles %}
+		{% for team in teams %}
 			<div class="element">
-				<img scr="{{ asset('img/' ~ profile.src ~ '') }}" />
-				<h2><a href="{{ path('tv_core_edit_profile', {'id': profile.id}) }}">{{ profile.name }}</a></h2>
+				<h2><a href="{{ path('tv_core_edit_team', {'id': team.id}) }}">{{ team.name }}</a></h2>
+				<p>{{ team.fullname }}<br />
+				   {{ team.nickname }}</p>
 			</div>
 		{% endfor %}
 	</div>

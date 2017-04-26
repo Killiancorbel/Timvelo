@@ -7,10 +7,10 @@
 	<div class="results">
 		{% for race in races %}
 			<div class="element">
-				<img scr="{{ race.profile.src }}" />
-				<img src="{{ race.flag.src }}" />
-				<h2>{{ race.name }}</h2>
-				<p>{{ race.date }}</p>
+				<img scr="{{ asset('img/' ~ race.profile.src ~ '') }}" />
+				<img src="{{ asset('img/' ~ race.flag.src ~ '') }}" />
+				<h2><a href="{{ path('tv_core_edit_race', {'id': race.id}) }}">{{ race.name }}</a></h2>
+				<p>{{ race.date|date }}</p>
 				<p>{{ race.classification.name }}</p>
 			</div>
 		{% endfor %}

@@ -10,6 +10,10 @@ use TV\CoreBundle\Entity\Flag;
 use TV\CoreBundle\Form\FlagType;
 use TV\CoreBundle\Entity\Classification;
 use TV\CoreBundle\Form\ClassificationType;
+use TV\CoreBundle\Entity\Team;
+use TV\CoreBundle\Form\TeamType;
+use TV\CoreBundle\Entity\Rider;
+use TV\CoreBundle\Form\RiderType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -189,6 +193,96 @@ class AdminController extends Controller
         return $this->render('TVCoreBundle:Admin:addClassification.html.twig', array(
             'form' => $form->createView(),
             'classifications' => $classifications));
+    }
+
+    public function addTeamAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $team = new Team();
+
+        $form = $this->createForm(TeamType::class, $team);
+        $teams = $em->getRepository('TVCoreBundle:Team')->findAll();
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($team);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('info', 'The new team has been added.');
+            return $this->redirectToRoute('tv_core_add_team');
+        }
+
+        return $this->render('TVCoreBundle:Admin:addTeam.html.twig', array(
+            'teams' => $teams,
+            'form' => $form->createView()));
+    }
+
+    public function editTeamAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $team = $em->getRepository('TVCoreBundle:Team')->find($id);
+        $teams = $em->getRepository('TVCoreBundle:Team')->findAll();
+
+
+        if ($team == null) {
+            throw new NotFoundHttpException('This team doesn\'t exist');
+        }
+
+        $form = $this->createForm(TeamType::class, $team);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('info', 'Team well edited');
+            return $this->redirectToRoute('tv_core_add_team');
+        }
+
+        return $this->render('TVCoreBundle:Admin:addTeam.html.twig', array(
+            'form' => $form->createView(),
+            'teams' => $teams));
+    }
+
+    public function addRiderAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rider = new Rider();
+
+        $form = $this->createForm(RiderType::class, $rider);
+        $riders = $em->getRepository('TVCoreBundle:Rider')->findAll();
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($rider);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('info', 'The new rider has been added.');
+            return $this->redirectToRoute('tv_core_add_rider');
+        }
+
+        return $this->render('TVCoreBundle:Admin:addRider.html.twig', array(
+            'riders' => $riders,
+            'form' => $form->createView()));
+    }
+
+    public function editRiderAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rider = $em->getRepository('TVCoreBundle:Rider')->find($id);
+        $riders = $em->getRepository('TVCoreBundle:Rider')->findAll();
+
+
+        if ($rider == null) {
+            throw new NotFoundHttpException('This rider doesn\'t exist');
+        }
+
+        $form = $this->createForm(RiderType::class, $rider);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('info', 'Rider well edited');
+            return $this->redirectToRoute('tv_core_add_rider');
+        }
+
+        return $this->render('TVCoreBundle:Admin:addRider.html.twig', array(
+            'form' => $form->createView(),
+            'riders' => $riders));
     }
 
 }

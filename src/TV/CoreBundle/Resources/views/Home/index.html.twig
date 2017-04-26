@@ -10,7 +10,7 @@
 				<img scr="{{ race.profile.src }}" />
 				<img src="{{ race.flag.src }}" />
 				<h2>{{ race.name }}</h2>
-				<p>{{ race.date }}</p>
+				<p>{{ race.date|date }}</p>
 				<p>{{ race.classification.name }}</p>
 			</div>
 		{% endfor %}

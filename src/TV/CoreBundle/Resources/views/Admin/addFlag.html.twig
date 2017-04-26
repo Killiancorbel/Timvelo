@@ -7,7 +7,7 @@
 	<div class="results">
 		{% for flag in flags %}
 			<div class="element">
-				<img scr="{{ flag.src }}" />
+				<img scr="{{ asset('img/' ~ flag.src ~ '') }}" />
 				<h2><a href="{{ path('tv_core_edit_flag', {'id': flag.id}) }}">{{ flag.name }}</a></h2>
 			</div>
 		{% endfor %}

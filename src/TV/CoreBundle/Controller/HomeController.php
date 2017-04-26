@@ -35,7 +35,7 @@ class HomeController extends Controller
     		$em->persist($race);
     		$em->flush();
             $request->getSession()->getFlashBag()->add('info', 'The new race has been added.');
-    		return $this->redirectToRoute('tv_core_homepage');
+    		return $this->redirectToRoute('tv_core_add_race');
     	}
 
     	return $this->render('TVCoreBundle:Home:add.html.twig', array(
@@ -53,15 +53,16 @@ class HomeController extends Controller
     	}
 
     	$form = $this->createForm(RaceType::class, $race);
+        $races = $em->getRepository('TVCoreBundle:Race')->findBy(array(), array('date' => 'desc'));
     	if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
     		$em->flush();
     		$request->getSession()->getFlashBag()->add('info', 'Race well edited');
-    		return $this->redirectToRoute('tv_core_homepage');
+    		return $this->redirectToRoute('tv_core_add_race');
     	}
 
     	return $this->render('TVCoreBundle:Home:add.html.twig', array(
     		'form' => $form->createView(),
-    		'race' => $race));
+    		'races' => $races));
     }
 
     public function deleteRaceAction(Request $request, $id)
