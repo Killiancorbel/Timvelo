@@ -8,6 +8,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class RaceType extends AbstractType
 {
@@ -19,10 +21,10 @@ class RaceType extends AbstractType
         $builder
             ->add('name',           TextType::class)
             ->add('date',           DateType::class)
-            ->add('profile',        ProfileType::class)
-            ->add('flag',           FlagType::class)
-            ->add('classification', ClassificationType::class)
-            ->add('logo'            TextType::class)
+            ->add('profile',        EntityType::class, array('class' => 'TVCoreBundle:Profile', 'choice_label' => 'name', 'multiple' => false, 'expanded' => false))
+            ->add('flag',           EntityType::class, array('class' => 'TVCoreBundle:Flag', 'choice_label' => 'name', 'multiple' => false, 'expanded' => false))
+            ->add('classification', EntityType::class, array('class' => 'TVCoreBundle:Classification', 'choice_label' => 'name', 'multiple' => false, 'expanded' => false))
+            ->add('logo',           TextType::class)
             ->add('profilepic',     TextType::class)
             ->add('save',           SubmitType::class);
     }

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ClassificationType extends AbstractType
 {
@@ -16,7 +17,8 @@ class ClassificationType extends AbstractType
     {
         $builder
             ->add('name',   TextType::class)
-            ->add('ident',  TextType::class);
+            ->add('ident',  TextType::class)
+            ->add('save',   SubmitType::class);
     }
     
     /**

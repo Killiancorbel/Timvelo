@@ -1,3 +1,73 @@
 tv_core_homepage:
-    path:     /
-    defaults: { _controller: TVCoreBundle:Default:index }
+    path:     /races
+    defaults: { _controller: TVCoreBundle:Home:index }
+
+tv_core_add_race:
+    path:    /races/add
+    defaults: { _controller: TVCoreBundle:Home:addRace }
+
+tv_core_edit_race:
+    path:    /races/edit/{id}
+    defaults: { _controller: TVCoreBundle:Home:editRace }
+    requirements:
+        id: \d+
+
+tv_core_delete_race:
+    path:    /races/delete/{id}
+    defaults: { _controller: TVCoreBundle:Home:deleteRace }
+    requirements:
+        id: \d+
+
+tv_core_info_race:
+    path:    /races/{id}
+    defaults: { _controller: TVCoreBundle:Home:infoRace }
+    requirements:
+        id: \d+
+
+# Profile
+
+tv_core_add_profile:
+    path:    /profiles/add
+    defaults: { _controller: TVCoreBundle:Admin:addProfile }
+
+tv_core_edit_profile:
+    path:    /profiles/edit/{id}
+    defaults: { _controller: TVCoreBundle:Admin:editProfile }
+    requirements:
+        id: \d+
+
+tv_core_delete_profile:
+    path:    /profiles/delete/{id}
+    defaults: { _controller: TVCoreBundle:Admin:deleteProfile }
+    requirements:
+        id: \d+
+
+# Flags
+
+tv_core_add_flag:
+    path:    /flags/add
+    defaults: { _controller: TVCoreBundle:Admin:addFlag }
+
+tv_core_edit_flag:
+    path:    /flags/edit/{id}
+    defaults: { _controller: TVCoreBundle:Admin:editFlag }
+    requirements:
+        id: \d+
+
+tv_core_delete_flag:
+    path:    /flags/delete/{id}
+    defaults: { _controller: TVCoreBundle:Admin:deleteFlag }
+    requirements:
+        id: \d+
+
+# Classifications
+
+tv_core_add_classification:
+    path:    /classifications/add
+    defaults: { _controller: TVCoreBundle:Admin:addClassification }
+
+tv_core_edit_classification:
+    path:    /classifications/edit/{id}
+    defaults: { _controller: TVCoreBundle:Admin:editClassification }
+    requirements:
+        id: \d+

@@ -15,27 +15,31 @@ class HomeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $races = $em->getRepository('TVCoreBundle:Race')->findBy(null, array('date' => 'desc'));
+        $races = $em->getRepository('TVCoreBundle:Race')->findBy(array(), array('date' => 'desc'));
 
         return $this->render('TVCoreBundle:Home:index.html.twig', array('races' => $races));
     }
 
     public function addRaceAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
     	$race = new Race();
 
+        $race->setDate(new \Datetime());
     	$form = $this->createForm(RaceType::class, $race);
+        $races = $em->getRepository('TVCoreBundle:Race')->findBy(array(), array('date' => 'desc'));
 
     	if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-    		$em->persist($client);
+    		$em->persist($race);
     		$em->flush();
             $request->getSession()->getFlashBag()->add('info', 'The new race has been added.');
     		return $this->redirectToRoute('tv_core_homepage');
     	}
 
     	return $this->render('TVCoreBundle:Home:add.html.twig', array(
+            'races' => $races,
     		'form' => $form->createView()));
     }
 
@@ -55,7 +59,7 @@ class HomeController extends Controller
     		return $this->redirectToRoute('tv_core_homepage');
     	}
 
-    	return $this->render('TVCoreBundle:Home:edit.html.twig', array(
+    	return $this->render('TVCoreBundle:Home:add.html.twig', array(
     		'form' => $form->createView(),
     		'race' => $race));
     }
@@ -83,7 +87,7 @@ class HomeController extends Controller
     public function infoRaceAction(Request $request, $id)
     {
     	$em = $this->getDoctrine()->getManager();
-    	$race = $em->getRepository('TVCoreBundle:Race')->find($id)
+    	$race = $em->getRepository('TVCoreBundle:Race')->find($id);
     	if (!$race)
     		throw new BadRequestHttpException('Bad request', null, 400);
 

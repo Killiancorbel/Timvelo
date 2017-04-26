@@ -1,0 +1,22 @@
+{% extends "::layout.html.twig" %}
+
+{% block body_left %}
+	<div class="search">
+		<input type="text" name="search" class="round" />
+	</div>
+	<div class="results">
+		{% for race in races %}
+			<div class="element">
+				<img scr="{{ race.profile.src }}" />
+				<img src="{{ race.flag.src }}" />
+				<h2>{{ race.name }}</h2>
+				<p>{{ race.date }}</p>
+				<p>{{ race.classification.name }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block body_right %}
+	{{ form(form) }}
+{% endblock %}
