@@ -8,6 +8,8 @@ use TV\CoreBundle\Entity\Profile;
 use TV\CoreBundle\Form\ProfileType;
 use TV\CoreBundle\Entity\Flag;
 use TV\CoreBundle\Form\FlagType;
+use TV\CoreBundle\Entity\Classification;
+use TV\CoreBundle\Form\ClassificationType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
