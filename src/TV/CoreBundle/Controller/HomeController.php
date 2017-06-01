@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use TV\CoreBundle\Entity\Race;
 use TV\CoreBundle\Form\RaceType;
+use TV\CoreBundle\Form\ResultType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -95,4 +98,52 @@ class HomeController extends Controller
     	$results = $em->getRepository('TVCoreBundle:Result')->findBy(array('race' => $race), array('position' => 'asc'));
   		return $this->render('TVCoreBundle:Home:info.html.twig', array('race' => $race, 'results' => $results));
     }
+
+    public function addResults(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $result = new Result();
+
+        $defaultData = array('Resultats' => 'Entrez résultats');
+        $form = $this->createFormBuilder($defaultData)
+            ->add('result1', ResultType::class)
+            ->add('result2', ResultType::class)
+            ->add('result3', ResultType::class)
+            ->add('result4', ResultType::class)
+            ->add('result5', ResultType::class)
+            ->add('result6', ResultType::class)
+            ->add('result7', ResultType::class)
+            ->add('result8', ResultType::class)
+            ->add('result9', ResultType::class)
+            ->add('result10', ResultType::class)
+            ->add('save',    SubmitType::class)
+            ->getForm()->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $em->persist($data['result1']);
+            $em->persist($data['result2']);
+            $em->persist($data['result3']);
+            $em->persist($data['result4']);
+            $em->persist($data['result5']);
+            $em->persist($data['result6']);
+            $em->persist($data['result7']);
+            $em->persist($data['result8']);
+            $em->persist($data['result9']);
+            $em->persist($data['result10']);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('info', 'Changes have been made.');
+            return $this->redirectToRoute('tv_core_add_race');
+        }
+        return $this->render('TVCoreBundle:Admin:addResult.html.twig', array(
+            'form' => $form->createView()));
+    }
+
+    public function getResults($id) {
+        $em = $this->getDoctrine()->getManager();
+        $race = $em->getRepository('TVCoreBundle:Race')->find($id);
+        $results = $em->getRepository('TVCoreBundle:Result')->findBy(array('race' => $race));
+        return $this->render('TVCoreBundle:Home:getResults.html.twig', array('results' => $results));
+    }
+
 }

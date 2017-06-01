@@ -95,3 +95,13 @@ tv_core_edit_rider:
     defaults: { _controller: TVCoreBundle:Admin:editRider }
     requirements:
         id: \d+
+
+#Results
+
+tv_core_add_results:
+    path:    /results/add
+    defaults: { _controller: TVCoreBundle:Home:addResults }
+
+tv_core_get_results:
+    path:    /results
+    defaults:    { _controller: TVCoreBundle:Home:getResults }

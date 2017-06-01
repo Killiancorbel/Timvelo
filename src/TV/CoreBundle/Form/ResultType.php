@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ResultType extends AbstractType
 {
@@ -15,7 +17,9 @@ class ResultType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('position')->add('race')->add('rider');
+            ->add('position',   TextType::class)
+            ->add('race',       EntityType::class, array('class' => 'TVCoreBundle:Race', 'choice_label' => 'name', 'multiple' => false, 'expanded' => false))
+            ->add('rider',      EntityType::class, array('class' => 'TVCoreBundle:Rider', 'choice_label' => 'nickname', 'multiple' => false, 'expanded' => false));
     }
     
     /**
